@@ -1,0 +1,37 @@
+/* Structure */
+.example-container {
+  position: relative;
+  // border: 2px solid green;
+}
+
+.header{
+  display: flex;
+  justify-content: space-between;
+  padding: 0.5rem 1rem;
+  // border: 2px solid black;
+}
+.example-table-container {
+  position: relative;
+  min-height: 200px;
+  max-height: 400px;
+  overflow: auto;
+}
+
+table {
+  width: 100%;
+}
+
+.example-rate-limit-reached {
+  max-width: 360px;
+  text-align: center;
+}
+
+/* Column Widths */
+.mat-column-number,
+.mat-column-state {
+  width: 64px;
+}
+
+.mat-column-created {
+  width: 124px;
+}

@@ -1,0 +1,29 @@
+mat-card {
+  max-width: 400px;
+  margin: 20px auto;
+  padding: 20px;
+}
+
+mat-form-field {
+  width: 100%;
+}
+
+button {
+  width: 100%;
+  margin-top: 20px;
+}
+
+.link-container {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.link-container a {
+  color: #1976d2; /* MUI Primary color */
+  text-decoration: none;
+}
+
+.link-container a:hover {
+  text-decoration: underline;
+}
+  

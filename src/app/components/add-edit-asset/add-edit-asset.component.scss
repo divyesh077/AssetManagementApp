@@ -1,0 +1,64 @@
+/* General Container Styles */
+.asset-container {
+  padding: 16px;
+  max-width: 1200px;
+  margin: auto;
+}
+
+/* Loading Overlay Styles */
+.loading-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+/* Asset Card Styles */
+.asset-card {
+  margin: 16px 0;
+}
+
+/* Card Title Styles */
+.card-title {
+  font-size: 24px;
+}
+
+/* Form Grid Styles */
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+/* Form Field Styles */
+.form-field {
+  width: 100%;
+}
+
+/* Form Section Styles */
+.form-section {
+  margin: 24px 0;
+}
+
+.form-section h6 {
+  font-size: 18px;
+  margin-bottom: 12px;
+}
+
+/* Card Actions Styles */
+mat-card-actions {
+  display: flex;
+  justify-content: space-between;
+}
+
+/* Add/Remove Button Styles */
+button[mat-mini-fab] {
+  margin: 4px;
+}

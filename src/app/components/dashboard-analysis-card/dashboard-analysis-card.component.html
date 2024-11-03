@@ -1,0 +1,26 @@
+<!-- Cards with media area -->
+<mat-card class="example-card" appearance="outlined">
+  <mat-card-header>
+    <mat-card-title-group>
+      <mat-card-title>{{ title }}</mat-card-title>
+      <mat-card-subtitle>{{ subTitle }}</mat-card-subtitle>
+    </mat-card-title-group>
+  </mat-card-header>
+  <mat-card-content
+    style="
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    "
+  >
+    <div>
+      <img src="" alt="" />
+    </div>
+    <div>
+      <h6 style="font-weight: bold">
+        {{ data.currency ? (data.value | currency) : data.value }}
+      </h6>
+      <p>{{ content }}</p>
+    </div>
+  </mat-card-content>
+</mat-card>

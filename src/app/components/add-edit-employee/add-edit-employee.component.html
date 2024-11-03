@@ -1,0 +1,102 @@
+<form [formGroup]="addressForm" novalidate (ngSubmit)="onSubmit()">
+  <mat-card class="shipping-card">
+    <mat-card-header>
+      <mat-card-title>Employee Information</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <div class="row">
+        <div class="col">
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Employee Number</mat-label>
+            <input
+              matInput
+              placeholder="Employee Number"
+              formControlName="usernumber"
+            />
+            @if (getFormControl('usernumber').hasError('required')) {
+            <mat-error>Employee Number is <strong>required</strong></mat-error>
+            }
+          </mat-form-field>
+        </div>
+        <div class="col">
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Username</mat-label>
+            <input matInput placeholder="Username" formControlName="username" />
+            @if (getFormControl('username').hasError('required')) {
+            <mat-error>Username is <strong>required</strong></mat-error>
+            }
+          </mat-form-field>
+        </div>
+        <div class="col">
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>First Name</mat-label>
+            <input
+              matInput
+              placeholder="First Name"
+              formControlName="firstName"
+            />
+            @if (getFormControl('firstName').hasError('required')) {
+            <mat-error>First name is <strong>required</strong></mat-error>
+            }
+          </mat-form-field>
+        </div>
+        <div class="col">
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Last name</mat-label>
+            <input
+              matInput
+              placeholder="Last Name"
+              formControlName="lastName"
+            />
+            @if (getFormControl('lastName').hasError('required')) {
+            <mat-error>Last name is <strong>required</strong></mat-error>
+            }
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Email Address</mat-label>
+            <input
+              matInput
+              type="email"
+              placeholder="Email Address"
+              formControlName="email"
+            />
+            @if (getFormControl('email').hasError('required')) {
+            <mat-error>Email is <strong>required</strong></mat-error>
+            } @if (getFormControl('email').hasError('email')) {
+            <mat-error>Email addres is <strong>invalid</strong></mat-error>
+            }
+          </mat-form-field>
+        </div>
+        <div class="col">
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Select a Role</mat-label>
+            <mat-select formControlName="role">
+              @for (role of roles; track $index) {
+              <mat-option [value]="role.value">{{ role.text }}</mat-option>
+              }
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div class="col">
+          <mat-radio-group
+            aria-label="Select an option"
+            formControlName="gender"
+          >
+            @for (gender of genders; track $index) {
+            <mat-radio-button [value]="gender.value">{{
+              gender.text
+            }}</mat-radio-button>
+            }
+          </mat-radio-group>
+        </div>
+      </div>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-raised-button color="primary" type="submit">Submit</button>
+    </mat-card-actions>
+  </mat-card>
+</form>

@@ -1,0 +1,13 @@
+<div class="container">
+  <div class="analysis-cards-container">
+    @for (dashboardAnalysisCard of dashboardAnalysisCards; track $index) {
+    <app-dashboard-analysis-card
+      [title]="dashboardAnalysisCard.title"
+      [subTitle]="dashboardAnalysisCard.subTitle"
+      [data]="dashboardAnalysisCard.data"
+      [content]="dashboardAnalysisCard.content"
+    >
+    </app-dashboard-analysis-card>
+    }
+  </div>
+</div>

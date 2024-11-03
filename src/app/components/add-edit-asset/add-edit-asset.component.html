@@ -1,0 +1,318 @@
+<div class="asset-container">
+  <!-- Loading Spinner -->
+  @if (isLoadingResults) {
+  <div class="loading-overlay">
+    <mat-spinner></mat-spinner>
+  </div>
+  }
+
+  <!-- Asset Form -->
+  <form [formGroup]="assetForm" novalidate (ngSubmit)="onSubmit()">
+    <mat-card class="asset-card">
+      <mat-card-header>
+        <mat-card-title class="card-title">Asset Information</mat-card-title>
+      </mat-card-header>
+
+      <mat-card-content>
+        <!-- Basic Asset Information -->
+        <div class="form-grid">
+          <!-- Asset Tag -->
+          <mat-form-field appearance="outline" class="form-field">
+            <mat-label>Asset Tag</mat-label>
+            <input
+              matInput
+              placeholder="Asset Tag"
+              formControlName="assetTag"
+            />
+          </mat-form-field>
+
+          <!-- Serial Number -->
+          <mat-form-field appearance="outline" class="form-field">
+            <mat-label>Serial Number</mat-label>
+            <input
+              matInput
+              placeholder="Serial Number"
+              formControlName="serialNumber"
+            />
+          </mat-form-field>
+
+          <!-- Model -->
+          <mat-form-field appearance="outline" class="form-field">
+            <mat-label>Model</mat-label>
+            <input matInput placeholder="Model" formControlName="model" />
+          </mat-form-field>
+
+          <!-- Category -->
+          <mat-form-field appearance="outline" class="form-field">
+            <mat-label>Category</mat-label>
+            <mat-select formControlName="category">
+              @for (category of assetCategories; track $index) {
+              <mat-option [value]="category._id">
+                {{ category.category }}
+              </mat-option>
+              }
+            </mat-select>
+          </mat-form-field>
+
+          <!-- Asset Type -->
+          <mat-form-field appearance="outline" class="form-field">
+            <mat-label>Asset Type</mat-label>
+            <mat-select formControlName="assetType">
+              <mat-option *ngFor="let type of assetTypes" [value]="type._id">
+                {{ type.name }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <!-- Status -->
+          <mat-form-field appearance="outline" class="form-field">
+            <mat-label>Status</mat-label>
+            <mat-select formControlName="status">
+              @for (status of statuses; track $index) {
+              <mat-option [value]="status.value">
+                {{ status.text }}
+              </mat-option>
+              }
+            </mat-select>
+          </mat-form-field>
+
+          <!-- Location -->
+          <mat-form-field appearance="outline" class="form-field">
+            <mat-label>Location</mat-label>
+            <mat-select formControlName="location">
+              @for (location of locations; track $index) {
+              <mat-option [value]="location.value">
+                {{ location.text }}
+              </mat-option>
+              }
+            </mat-select>
+          </mat-form-field>
+
+          <!-- Manufacturer -->
+          <mat-form-field appearance="outline" class="form-field">
+            <mat-label>Manufacturer</mat-label>
+            <input
+              matInput
+              placeholder="Manufacturer"
+              formControlName="manufacturer"
+            />
+          </mat-form-field>
+
+          <!-- Service Tag -->
+          <mat-form-field appearance="outline" class="form-field">
+            <mat-label>Service Tag</mat-label>
+            <input
+              matInput
+              placeholder="Service Tag"
+              formControlName="serviceTag"
+            />
+          </mat-form-field>
+
+          <!-- Description -->
+          <mat-form-field appearance="outline" class="form-field">
+            <mat-label>Description</mat-label>
+            <textarea
+              matInput
+              placeholder="Description"
+              formControlName="description"
+            ></textarea>
+          </mat-form-field>
+
+          <!-- Notes -->
+          <mat-form-field appearance="outline" class="form-field">
+            <mat-label>Notes</mat-label>
+            <textarea
+              matInput
+              placeholder="Notes"
+              formControlName="notes"
+            ></textarea>
+          </mat-form-field>
+        </div>
+
+        <!-- Purchase Details -->
+        <div class="form-section">
+          <h6>Purchase Details</h6>
+          <div class="form-grid">
+            <!-- Purchase Order Number -->
+            <mat-form-field appearance="outline" class="form-field">
+              <mat-label>Purchase Order Number</mat-label>
+              <input
+                matInput
+                placeholder="Purchase Order Number"
+                formControlName="purchaseOrderNumber"
+              />
+            </mat-form-field>
+
+            <!-- Purchase Cost -->
+            <mat-form-field appearance="outline" class="form-field">
+              <mat-label>Purchase Cost</mat-label>
+              <input
+                matInput
+                placeholder="Purchase Cost"
+                formControlName="purchaseCost"
+              />
+            </mat-form-field>
+
+            <!-- Acquisition Date -->
+            <mat-form-field appearance="outline" class="form-field">
+              <mat-label>Acquisition Date</mat-label>
+              <input
+                matInput
+                [matDatepicker]="acquisitionDatePicker"
+                placeholder="Acquisition Date"
+                formControlName="acquisitionDate"
+              />
+              <mat-hint>MM/DD/YYYY</mat-hint>
+              <mat-datepicker-toggle
+                matIconSuffix
+                [for]="acquisitionDatePicker"
+              ></mat-datepicker-toggle>
+              <mat-datepicker #acquisitionDatePicker></mat-datepicker>
+            </mat-form-field>
+
+            <!-- Current Value -->
+            <mat-form-field appearance="outline" class="form-field">
+              <mat-label>Current Value</mat-label>
+              <input
+                matInput
+                placeholder="Current Value"
+                formControlName="currentValue"
+              />
+            </mat-form-field>
+
+            <!-- Depreciation Rate -->
+            <mat-form-field appearance="outline" class="form-field">
+              <mat-label>Depreciation Rate</mat-label>
+              <input
+                matInput
+                placeholder="Depreciation Rate"
+                formControlName="depreciationRate"
+              />
+            </mat-form-field>
+          </div>
+        </div>
+
+        <!-- Warranty Information -->
+        <div class="form-section">
+          <h6>Warranty Information</h6>
+          <div formGroupName="warrantyInfo" class="form-grid">
+            <!-- Provider -->
+            <mat-form-field appearance="outline" class="form-field">
+              <mat-label>Provider</mat-label>
+              <input
+                matInput
+                placeholder="Provider"
+                formControlName="provider"
+              />
+            </mat-form-field>
+
+            <!-- Warranty Start Date -->
+            <mat-form-field appearance="outline" class="form-field">
+              <mat-label>Warranty Start Date</mat-label>
+              <input
+                matInput
+                [matDatepicker]="warrantyStartDatePicker"
+                placeholder="Start Date"
+                formControlName="start"
+              />
+              <mat-hint>MM/DD/YYYY</mat-hint>
+              <mat-datepicker-toggle
+                matIconSuffix
+                [for]="warrantyStartDatePicker"
+              ></mat-datepicker-toggle>
+              <mat-datepicker #warrantyStartDatePicker></mat-datepicker>
+            </mat-form-field>
+
+            <!-- Warranty End Date -->
+            <mat-form-field appearance="outline" class="form-field">
+              <mat-label>Warranty End Date</mat-label>
+              <input
+                matInput
+                [matDatepicker]="warrantyEndDatePicker"
+                placeholder="End Date"
+                formControlName="end"
+              />
+              <mat-hint>MM/DD/YYYY</mat-hint>
+              <mat-datepicker-toggle
+                matIconSuffix
+                [for]="warrantyEndDatePicker"
+              ></mat-datepicker-toggle>
+              <mat-datepicker #warrantyEndDatePicker></mat-datepicker>
+            </mat-form-field>
+          </div>
+        </div>
+
+        <!-- Maintenance Logs -->
+        <div class="form-section">
+          <h6>Maintenance Logs</h6>
+          <div formArrayName="maintenanceLogs">
+            <div
+              *ngFor="
+                let maintenanceLog of maintenanceLogs.controls;
+                index as i
+              "
+              [formGroupName]="i"
+              class="form-grid"
+            >
+              <!-- Log Description -->
+              <mat-form-field appearance="outline" class="form-field">
+                <mat-label>Description</mat-label>
+                <input
+                  matInput
+                  placeholder="Description"
+                  formControlName="description"
+                />
+              </mat-form-field>
+
+              <!-- Log Cost -->
+              <mat-form-field appearance="outline" class="form-field">
+                <mat-label>Cost</mat-label>
+                <input matInput placeholder="Cost" formControlName="cost" />
+              </mat-form-field>
+
+              <!-- Log Date -->
+              <mat-form-field appearance="outline" class="form-field">
+                <mat-label>Date</mat-label>
+                <input
+                  matInput
+                  [matDatepicker]="logDatePicker"
+                  placeholder="Date"
+                  formControlName="date"
+                />
+                <mat-hint>MM/DD/YYYY</mat-hint>
+                <mat-datepicker-toggle
+                  matIconSuffix
+                  [for]="logDatePicker"
+                ></mat-datepicker-toggle>
+                <mat-datepicker #logDatePicker></mat-datepicker>
+              </mat-form-field>
+
+              <!-- Remove Log Button -->
+              <button
+                type="button"
+                mat-mini-fab
+                color="primary"
+                (click)="onRemoveMaintenanceLog(i)"
+              >
+                <mat-icon>delete</mat-icon>
+              </button>
+            </div>
+            <button
+              type="button"
+              mat-raised-button
+              color="primary"
+              (click)="onAddMaintenanceLogs()"
+            >
+              + Add Maintenance Log
+            </button>
+          </div>
+        </div>
+      </mat-card-content>
+
+      <mat-card-actions>
+        <button mat-flat-button color="primary" type="submit">Save</button>
+        <button mat-raised-button color="warn">Clear</button>
+      </mat-card-actions>
+    </mat-card>
+  </form>
+</div>

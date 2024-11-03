@@ -1,0 +1,151 @@
+<div class="example-container mat-elevation-z2">
+  <!-- @if (this.isLoading || this.isAssigningToEmployee) {
+  <div class="loading-shade">
+    <mat-spinner></mat-spinner>
+  </div>
+  } -->
+  @if (this.isLoading || this.isAssigningToEmployee) {
+  <mat-progress-bar
+    mode="indeterminate"
+    class="progress-bar"
+  ></mat-progress-bar>
+
+  }
+
+  <div class="header">
+    <div class="left">
+      <h6>Manage Assets</h6>
+    </div>
+    <div>
+      <!-- <section>
+        <mat-button-toggle-group
+          [(ngModel)]="filterStatus"
+          (change)="onFilterChange()"
+          aria-label="Font Style"
+        >
+          <mat-button-toggle value="active">active</mat-button-toggle>
+          <mat-button-toggle value="inactive">inactive</mat-button-toggle>
+          <mat-button-toggle value="maintenance">maintenance</mat-button-toggle>
+        </mat-button-toggle-group>
+      </section> -->
+      <app-asset-filter-options></app-asset-filter-options>
+    </div>
+    <div class="right">
+      <a [routerLink]="['../', 'add-asset']" mat-mini-fab color="primary">
+        <mat-icon class="mat-18">add</mat-icon>
+      </a>
+    </div>
+  </div>
+
+  <div class="example-table-container">
+    <table
+      mat-table
+      [dataSource]="assets"
+      class="full-width-table"
+      matSort
+      aria-label="Elements"
+    >
+      <!-- AssetTag Column -->
+      <ng-container matColumnDef="assetTag">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Asset Tag</th>
+        <td mat-cell *matCellDef="let asset">{{ asset.assetTag }}</td>
+      </ng-container>
+
+      <!-- Asset SerialNumber Column -->
+      <ng-container matColumnDef="serialNumber">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>SerialNumber</th>
+        <td mat-cell *matCellDef="let asset">{{ asset.serialNumber }}</td>
+      </ng-container>
+
+      <!-- Asset category Column -->
+      <ng-container matColumnDef="category">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Category</th>
+        <td mat-cell *matCellDef="let asset">
+          {{ asset.category?.category }}
+        </td>
+      </ng-container>
+
+      <!-- Asset Type Column -->
+      <ng-container matColumnDef="assetType">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>AssetType</th>
+        <td mat-cell *matCellDef="let asset">{{ asset.assetType?.name }}</td>
+      </ng-container>
+
+      <!-- Asset Type Column -->
+      <ng-container matColumnDef="model">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Model</th>
+        <td mat-cell *matCellDef="let asset">{{ asset.model }}</td>
+      </ng-container>
+
+      <!-- Asset Type Column -->
+      <ng-container matColumnDef="status">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>status</th>
+        <td mat-cell *matCellDef="let asset">{{ asset.status }}</td>
+      </ng-container>
+
+      <!-- location Column -->
+      <ng-container matColumnDef="location">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Location</th>
+        <td mat-cell *matCellDef="let asset">{{ asset.location }}</td>
+      </ng-container>
+
+      <!-- Assign Column -->
+      <ng-container matColumnDef="assignTo">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Assign</th>
+        <td mat-cell *matCellDef="let asset">
+          @if (asset.assignedTo) {
+          <span>{{ asset.assignedTo.username }}</span>
+          } @else {
+          <button mat-mini-fab (click)="onAssignTo(asset._id)" color="primary">
+            <mat-icon class="mat-18">assignment_ind</mat-icon>
+          </button>
+          }
+        </td>
+      </ng-container>
+
+      <!-- View Column -->
+      <ng-container matColumnDef="info">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Info</th>
+        <td mat-cell *matCellDef="let asset">
+          <button
+            mat-icon-button
+            (click)="onViewAsset(asset._id)"
+            color="primary"
+          >
+            <mat-icon class="mat-18">info</mat-icon>
+          </button>
+        </td>
+      </ng-container>
+
+      <!-- Actions Column -->
+      <ng-container matColumnDef="actions">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Action</th>
+        <td mat-cell *matCellDef="let asset">
+          <button
+            mat-icon-button
+            (click)="onEditAsset(asset._id)"
+            color="primary"
+          >
+            <mat-icon class="mat-18">edit</mat-icon>
+          </button>
+          <button
+            mat-icon-button
+            (click)="onDeleteAsset(asset._id)"
+            color="warn"
+          >
+            <mat-icon class="mat-18">delete</mat-icon>
+          </button>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+    </table>
+  </div>
+  <mat-paginator
+    [length]="totalAssetsCount"
+    [pageSizeOptions]="pageSizeOptions"
+    aria-label="Select page"
+  >
+  </mat-paginator>
+</div>
